@@ -5,7 +5,7 @@ locals {
     Environment = "${var.environment}"
     Toolkit     = "terraform"
     Name        = "${var.prefix}"
-    Customer    = "internal"
-    Contact     = "rafael@dataroots.io"
+    customer    = "internal"
+    contact     = "rafael@dataroots.io"
   }
 }
