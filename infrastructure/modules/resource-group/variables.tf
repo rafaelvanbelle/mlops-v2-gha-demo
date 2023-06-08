@@ -6,7 +6,9 @@ variable "location" {
 
 variable "tags" {
   type        = map(string)
-  default     = {}
+  default     = {
+    customer = "internal",
+    contact = "rafael@dataroots.io"}
   description = "A mapping of tags which should be assigned to the Resource Group"
 }
 
