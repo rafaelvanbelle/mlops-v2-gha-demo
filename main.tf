@@ -1,8 +1,9 @@
 terraform {
-  backend "azurerm" {}
-  required_providers {
-    azurerm = {
-      version = "= 2.99.0"
+  cloud {
+    organization = "tutorial-terraform-raf"
+
+    workspaces {
+      name = "terraform-github-actions"
     }
   }
 }
