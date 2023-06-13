@@ -61,4 +61,4 @@ jobs:
               with:
                 creds: ${{secrets.AZURE_CREDENTIALS}}
             - name: Azure run pipeline              
-              run: az ml run pipeline -f ./mlops/azureml/train/pipeline.yml --resource-group $resource_group --workspace-name $workspace_name
+              run: az ml run submit-pipeline -f ./mlops/azureml/train/pipeline.yml --resource-group $resource_group --workspace-name $workspace_name
