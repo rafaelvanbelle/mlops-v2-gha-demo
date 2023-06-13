@@ -34,4 +34,4 @@ jobs:
               with:
                 creds: ${{secrets.AZURE_CREDENTIALS}}
             - name: Azure create compute
-              run: az ml compute create -f ./mlops/azureml/train/data.yml --resource-group $resource_group --workspace-name $workspace_name
+              run: az ml compute create -f ./mlops/azureml/compute.yml --resource-group $resource_group --workspace-name $workspace_name
