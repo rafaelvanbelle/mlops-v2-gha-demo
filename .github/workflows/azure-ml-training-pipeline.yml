@@ -2,6 +2,10 @@ name: Manually trigger an Azure Machine Learning job
 
 on:
   workflow_dispatch:
+  
+env:
+  resource_group: rg-004-ao04prod
+  workspace_name: mlw-004-ao04prod
 
 jobs:
   train:
@@ -16,4 +20,4 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Azure register dataset
-      run: az ml data create -f ./mlops/azureml/train/data.yml
+      run: az ml data create -f ./mlops/azureml/train/data.yml --resource-group $resource_group --workspace-name $workspace_name
