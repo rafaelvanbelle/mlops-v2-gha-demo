@@ -6,8 +6,8 @@ on:
 env:
   TF_CLOUD_ORGANIZATION: "tutorial-terraform-raf"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "learn-terraform-azure"
-  CONFIG_DIRECTORY: "./"
+  TF_WORKSPACE: "terraform-github-actions"
+  CONFIG_DIRECTORY: "./infrastructure/"
 
 jobs:
   terraform:
