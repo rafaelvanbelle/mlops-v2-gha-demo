@@ -4,16 +4,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  train:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out repo
-      uses: actions/checkout@main
-    - name: Install az ml extension
-      run: az extension add -n ml -y
-    - name: Azure login
-      uses: azure/login@v1
-      with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
-    - name: Azure register dataset
-      run: az ml data create -f ./mlops/azureml/train/data.yml
+    register-dataset:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@main
+            - name: Install az ml extension
+              run: az extension add -n ml -y
+            - name: Azure login
+              uses: azure/login@v1
+              with:
+                creds: ${{secrets.AZURE_CREDENTIALS}}
+            - name: Azure register dataset
+              run: az ml data create -f ./mlops/azureml/train/data.yml
+    create-compute:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@main
+            - name: Install az ml extension
+              run: az extension add -n ml -y
+            - name: Azure login
+              uses: azure/login@v1
+              with:
+                creds: ${{secrets.AZURE_CREDENTIALS}}
+            - name: Azure create compute
+              run: az ml compute create -f ./mlops/azureml/train/data.yml
