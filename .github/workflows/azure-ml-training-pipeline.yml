@@ -21,6 +21,19 @@ jobs:
                 creds: ${{secrets.AZURE_CREDENTIALS}}
             - name: Azure register dataset              
               run: az ml data create -f ./mlops/azureml/train/data.yml --resource-group $resource_group --workspace-name $workspace_name
+    register-environment:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@main
+            - name: Install az ml extension
+              run: az extension add -n ml -y
+            - name: Azure login
+              uses: azure/login@v1
+              with:
+                creds: ${{secrets.AZURE_CREDENTIALS}}
+            - name: Azure register dataset              
+              run: az ml environment create -f ./mlops/azureml/train/train-env.yml --resource-group $resource_group --workspace-name $workspace_name
 
     create-compute:
         runs-on: ubuntu-latest
@@ -35,3 +48,17 @@ jobs:
                 creds: ${{secrets.AZURE_CREDENTIALS}}
             - name: Azure create compute
               run: az ml compute create -f ./mlops/azureml/compute.yml --resource-group $resource_group --workspace-name $workspace_name
+    run-pipeline:
+        needs: [register-environment,create-compute,register-dataset]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@main
+            - name: Install az ml extension
+              run: az extension add -n ml -y
+            - name: Azure login
+              uses: azure/login@v1
+              with:
+                creds: ${{secrets.AZURE_CREDENTIALS}}
+            - name: Azure run pipeline              
+              run: az ml run pipeline -f ./mlops/azureml/train/pipeline.yml --resource-group $resource_group --workspace-name $workspace_name
