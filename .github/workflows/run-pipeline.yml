@@ -24,4 +24,4 @@ jobs:
               with: 
                 creds: ${{secrets.AZURE_CREDENTIALS}}
             - name: run pipeline
-              run: az ml job create -f ./mlops/azureml/pipeline/pipeline.yml -r ${{env.resource_group}} -w ${{env.workspace_name}}
+              run: az ml job create -f ./mlops/azureml/pipeline/pipeline.yml -g ${{env.resource_group}} -w ${{env.workspace_name}}
