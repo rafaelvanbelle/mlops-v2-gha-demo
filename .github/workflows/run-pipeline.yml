@@ -1,0 +1,27 @@
+name: cli-jobs-pipelines-nyc-taxi-pipeline
+on:
+    workflow_dispatch:
+    schedule:
+      - cron: "4 6/12 * * *"
+    pull_request:
+        branches:
+            - main
+
+env:
+    resource_group: rg-004-ao04prod
+    workspace_name: mlw-004-ao04prod
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: check out repo
+              uses: actions/checkout@v2
+            - name: Install az ml extension
+              run: az extension add -n ml -y
+            - name: azure login
+              uses: azure/login@v1
+              with: 
+                creds: ${{secrets.AZUREML_CREDENTIALS}}
+            - name: run pipeline
+              run: az ml job create -f ./mlops/azureml/pipeline/pipeline.yml
