@@ -11,7 +11,7 @@ jobs:
     inputs:
       raw_data:
         type: uri_folder
-        path: ./data/data
+        path: ./data
     outputs:
       prep_data:
         mode: upload
