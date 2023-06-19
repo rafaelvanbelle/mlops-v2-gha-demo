@@ -22,6 +22,6 @@ jobs:
             - name: azure login
               uses: azure/login@v1
               with: 
-                creds: ${{secrets.AZUREML_CREDENTIALS}}
+                creds: ${{secrets.AZURE_CREDENTIALS}}
             - name: run pipeline
               run: az ml job create -f ./mlops/azureml/pipeline/pipeline.yml
